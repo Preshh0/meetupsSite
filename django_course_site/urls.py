@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('meetups.urls')) #the file name where our url patterns are stored without the extension.
+    path('', RedirectView.as_view(url='/meetups')), #the file name where our url patterns are stored without the extension.
+    path('meetups/', include('meetups.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
